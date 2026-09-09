@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ToDoTion - Productive Workspace</title>
+    <!-- Links CSS -->
+    <link rel="stylesheet" href="css/base.css" />
+    <link rel="stylesheet" href="css/layout.css" />
+    <link rel="stylesheet" href="css/components.css" />
+  </head>
+
+  <body>
+    <!-- CABECERA DE LA APLICACIÓN (Ahora más limpia sin las estadísticas dentro) -->
+    <header class="main-header">
+      <div class="header-brand">
+        <img src="assets/logo/logo.png" alt="ToDoTion Logo" class="app-logo" />
+      </div>
+
+      <div class="header-actions">
+        <div class="search-container">
+          <input
+            type="text"
+            id="search-bar"
+            placeholder="Buscar tarea por título..."
+          />
+        </div>
+        <button id="btn-open-add-modal" class="btn-primary">
+          + Añadir Tarea
+        </button>
+      </div>
+    </header>
+
+    <!-- ¡NUEVO BLOQUE DE ESTADÍSTICAS! Situado por encima de las pizarras -->
+    <section class="dashboard-stats-wrapper">
+      <div class="stats-panel">
+        <div class="stat-box status-todo">
+          Por Hacer <span id="count-todo">0</span>
+        </div>
+        <div class="stat-box status-doing">
+          En Proceso <span id="count-doing">0</span>
+        </div>
+        <div class="stat-box status-done">
+          Finalizado <span id="count-done">0</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Tablero Kanban -->
+    <main class="kanban-board">
+      <!-- Pizarra 1 "ToDo" -->
+      <section class="kanban-column" id="column-todo">
+        <div class="column-header">
+          <h2>Por Hacer</h2>
+          <span class="column-badge" id="badge-todo">0</span>
+        </div>
+        <!-- Contenedor donde SortableJS actuará y meterá las tarjetas -->
+        <div class="task-list" id="list-todo"></div>
+      </section>
+
+      <!-- Pizarra 2 "Doing" -->
+      <section class="kanban-column" id="column-doing">
+        <div class="column-header">
+          <h2>En Proceso</h2>
+          <span class="column-badge" id="badge-doing">0</span>
+        </div>
+        <div class="task-list" id="list-doing"></div>
+      </section>
+
+      <!-- Pizarra 3 "Done" -->
+      <section class="kanban-column" id="column-done">
+        <div class="column-header">
+          <h2>Finalizado</h2>
+          <span class="column-badge" id="badge-done">0</span>
+        </div>
+        <div class="task-list" id="list-done"></div>
+      </section>
+    </main>
+
+    <!-- NOTA: Las ventanas modales flotantes las dejaremos preparadas más adelante -->
+
+    <!-- Enlace al JS principal -->
+    <script src="js/main.js"></script>
+  </body>
+</html>

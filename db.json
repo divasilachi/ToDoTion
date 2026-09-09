@@ -1,0 +1,26 @@
+{
+  "tasks": [
+    {
+      "id": "1",
+      "title": "Configurar SortableJS para Drag & Drop",
+      "description": "Integrar la librería SortableJS en Vanilla JavaScript para permitir arrastrar y soltar las tarjetas entre columnas persistiendo el estado automáticamente con fetch a la API mock json-server.",
+      "priority": "Alta",
+      "limitDate": "2024-10-26",
+      "status": "doing",
+      "comments": [
+        "Probé la librería en local con SortableJS y responde muy rápido. Solo falta sincronizar el evento onEnd con el PATCH.",
+        "Genial, ya dejé listo el endpoint en el json-server para recibir el status modificado. Cualquier duda con el payload de {\"columnId\": \"in_progress\"} me avisas por Slack.",
+        "Rama de Git feature/sortable-kanban vinculada exitosamente con el PR #14."
+      ]
+    },
+    {
+      "id": "2",
+      "title": "Diseñar arquitectura de componentes",
+      "description": "Definir la estructura del HTML y los archivos CSS iniciales.",
+      "priority": "Alta",
+      "limitDate": "2024-10-28",
+      "status": "todo",
+      "comments": []
+    }
+  ]
+}

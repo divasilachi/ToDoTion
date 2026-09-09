@@ -1,0 +1,121 @@
+/* ==========================================================================
+   1. DISEÑO DE LAS TARJETAS DE TAREA (Task Cards)
+   ========================================================================== */
+.task-card {
+  background-color: var(--neutral-card);
+  padding: 16px;
+  border-radius: 8px;
+  box-shadow:
+    0 1px 3px rgba(0, 0, 0, 0.05),
+    0 1px 2px rgba(0, 0, 0, 0.03);
+  cursor: grab; /* Cambia el cursor a una mano para indicar que se puede arrastrar */
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.task-card:hover {
+  transform: translateY(
+    -2px
+  ); /* Hace un pequeño efecto de levitación al pasar el ratón */
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.08);
+}
+
+.task-card:active {
+  cursor: grabbing; /* Cambia el icono al "agarrar" la tarjeta */
+}
+
+/* Elementos internos de la tarjeta */
+.card-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-main);
+  line-height: 1.4;
+}
+
+.card-desc {
+  font-size: 12px;
+  color: var(--text-muted);
+  line-height: 1.5;
+  /* Truco CSS: Corta el texto a máximo 3 líneas */
+  display: -webkit-box;
+  line-clamp: 3; /* ➔ Añadimos la propiedad estándar para máxima compatibilidad */
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* Parte baja de la tarjeta (Prioridad + Fecha) */
+.card-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 4px;
+  font-size: 11px;
+}
+
+.card-date {
+  color: var(--text-muted);
+  font-weight: 500;
+}
+
+/* Píldoras de Prioridad (Semáforo de colores con textos contrastados) */
+.badge-priority {
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.badge-priority.alta {
+  background-color: #fee2e2; /* Rojo clarito de fondo */
+  color: var(--priority-high);
+}
+
+.badge-priority.media {
+  background-color: #fef3c7; /* Naranja/Amarillo clarito */
+  color: var(--priority-medium);
+}
+
+.badge-priority.baja {
+  background-color: #dbeafe; /* Azul clarito */
+  color: var(--priority-low);
+}
+
+/* ==========================================================================
+   2. ESTRUCTURA DE LAS VENTANAS MODALES FLOTANTES (Fondo Difuminado)
+   ========================================================================== */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(30, 41, 59, 0.4); /* Gris oscuro translúcido */
+  backdrop-filter: blur(4px); /* ¡Magia! Difumina el fondo de la app */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000; /* Asegura que flote por encima de todo */
+
+  /* ¡IMPORTANTE! Lo dejamos oculto por defecto para el Día 1 */
+  display: none;
+}
+
+/* El recuadro blanco del formulario dentro del modal */
+.modal-box {
+  background-color: var(--neutral-card);
+  width: 100%;
+  max-width: 500px; /* Tamaño ideal de tus capturas */
+  padding: 24px;
+  border-radius: 12px;
+  box-shadow:
+    0 20px 25px -5px rgba(0, 0, 0, 0.1),
+    0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
