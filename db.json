@@ -1,54 +1,86 @@
 {
   "tasks": [
     {
-      "id": "1",
-      "title": "Configurar SortableJS para Drag & Drop",
-      "description": "Integrar la librería SortableJS en Vanilla JavaScript para permitir arrastrar y soltar las tarjetas entre columnas persistiendo el estado automáticamente con fetch a la API mock json-server.",
-      "priority": "Alta",
-      "limitDate": "2024-10-26",
-      "status": "done",
-      "comments": [
-        "Probé la librería en local con SortableJS y responde muy rápido. Solo falta sincronizar el evento onEnd con el PATCH.",
-        "Genial, ya dejé listo el endpoint en el json-server para recibir el status modificado. Cualquier duda con el payload de {\"columnId\": \"in_progress\"} me avisas por Slack.",
-        "Rama de Git feature/sortable-kanban vinculada exitosamente con el PR #14."
-      ]
-    },
-    {
-      "id": "2",
-      "title": "Diseñar arquitectura de componentes",
-      "description": "Definir la estructura del HTML y los archivos CSS iniciales.",
-      "priority": "Alta",
-      "limitDate": "2024-10-28",
-      "status": "todo",
-      "comments": []
-    },
-    {
-      "title": "12344",
-      "description": "Prueba",
-      "priority": "Media",
-      "limitDate": "2004-05-04",
-      "status": "done",
-      "comments": [],
-      "id": "ZFyrkmPpdLw"
-    },
-    {
-      "title": "2234",
-      "description": "Otra prueba mas",
+      "title": "111",
+      "description": "1111",
       "priority": "Baja",
-      "limitDate": "2002-01-01",
-      "status": "doing",
-      "comments": [],
-      "id": "tV6DjWuPvnU"
+      "dueDate": "1111-11-11",
+      "status": "todo",
+      "id": "o__S4ty8y9E"
+    },
+    {
+      "title": "222",
+      "description": "22222",
+      "priority": "Media",
+      "dueDate": "2222-02-22",
+      "status": "done",
+      "id": "jTKacroM_14"
     },
     {
       "title": "333",
-      "description": "333",
-      "priority": "Baja",
-      "limitDate": "3333-03-31",
-      "status": "done",
-      "comments": [],
-      "id": "KCOKZ3f1s7k"
+      "description": "333333",
+      "priority": "Alta",
+      "dueDate": "3333-03-31",
+      "status": "doing",
+      "id": "KNo2IMITGiI"
     }
   ],
-  "$schema": "./node_modules/json-server/schema.json"
+  "comments": [
+    {
+      "id": "101",
+      "taskId": null,
+      "author": "Ana Gómez",
+      "text": "Recuerda incluir los estados de hover en los botones del modal.",
+      "createdAt": "2026-09-06T10:30:00Z"
+    },
+    {
+      "taskId": null,
+      "author": "Tú (Desarrollador)",
+      "text": "fgdfg",
+      "createdAt": "2026-09-10T17:56:44.870Z",
+      "id": "voCAhLJxOu0"
+    },
+    {
+      "taskId": null,
+      "author": "Tú (Desarrollador)",
+      "text": "fgdfg",
+      "createdAt": "2026-09-10T17:56:49.447Z",
+      "id": "-BwMOZ3-yBk"
+    },
+    {
+      "taskId": null,
+      "author": "Equipo de desarrollo",
+      "text": "fgdfg",
+      "createdAt": "2026-09-10T18:01:36.217Z",
+      "id": "k8-vFThqSLU"
+    },
+    {
+      "taskId": null,
+      "author": "Equipo de desarrollo",
+      "text": "fgdfg",
+      "createdAt": "2026-09-10T18:04:50.083Z",
+      "id": "5IDXzpM_9do"
+    },
+    {
+      "taskId": null,
+      "author": "Equipo de desarrollo",
+      "text": "fgdfg",
+      "createdAt": "2026-09-10T18:05:15.333Z",
+      "id": "WTxldkqBdy4"
+    },
+    {
+      "taskId": null,
+      "author": "Equipo de desarrollo",
+      "text": "fgdfg",
+      "createdAt": "2026-09-10T18:05:20.436Z",
+      "id": "pSvwkYCz35M"
+    },
+    {
+      "taskId": "KNo2IMITGiI",
+      "author": "Equipo de desarrollo",
+      "text": "ss",
+      "createdAt": "2026-09-10T19:02:07.353Z",
+      "id": "P-7eUn_w0Ok"
+    }
+  ]
 }

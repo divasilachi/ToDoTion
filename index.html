@@ -1,40 +1,51 @@
 <!doctype html>
-<html lang="en">
+<html lang="es">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>ToDoTion - Productive Workspace</title>
-    <!-- Links CSS -->
     <link rel="stylesheet" href="css/base.css" />
     <link rel="stylesheet" href="css/layout.css" />
     <link rel="stylesheet" href="css/components.css" />
   </head>
-
   <body>
-    <!-- CABECERA DE LA APLICACIÓN (Ahora más limpia sin las estadísticas dentro) -->
     <header class="main-header">
       <div class="header-brand">
         <img src="assets/logo/logo.png" alt="ToDoTion Logo" class="app-logo" />
       </div>
-
       <div class="header-actions">
-        <div class="search-container">
-          <input
-            type="text"
-            id="search-bar"
-            placeholder="Buscar tarea por título..."
-          />
+        <!-- Botón de hamburguesa nativo -->
+        <button id="btn-hamburger" class="btn-hamburger">☰</button>
+
+        <!-- Menú de acciones principal -->
+        <div id="nav-menu-responsive" class="nav-menu-responsive">
+          <div class="search-container">
+            <input
+              type="text"
+              id="search-bar"
+              placeholder=" Buscar tarea por título..."
+            />
+          </div>
+          <button id="btn-open-add-modal" class="btn-primary">
+            + Añadir Tarea
+          </button>
         </div>
-        <button id="btn-open-add-modal" class="btn-primary">
-          + Añadir Tarea
-        </button>
       </div>
     </header>
 
-    <!-- ¡NUEVO BLOQUE DE ESTADÍSTICAS! Situado por encima de las pizarras -->
+    <!-- ➔ NUEVO SELECTOR DE PIZARRAS PARA MÓVIL -->
+    <div class="mobile-board-selector">
+      <button class="selector-tab active" data-target="column-todo">
+        Por Hacer
+      </button>
+      <button class="selector-tab" data-target="column-doing">
+        En Proceso
+      </button>
+      <button class="selector-tab" data-target="column-done">Finalizado</button>
+    </div>
+
     <section class="dashboard-stats-wrapper">
       <div class="progress-dashboard">
-        <!-- PARTE IZQUIERDA: Las leyendas con sus colores -->
         <div class="progress-legend">
           <span class="legend-item todo"
             >● Por Hacer (<span id="count-todo">0</span>)</span
@@ -46,8 +57,6 @@
             >● Finalizado (<span id="count-done">0</span>)</span
           >
         </div>
-
-        <!-- PARTE DERECHA: La barra segmentada proporcional -->
         <div class="progress-bar-container">
           <div
             class="progress-segment segment-todo"
@@ -68,19 +77,15 @@
       </div>
     </section>
 
-    <!-- Tablero Kanban -->
     <main class="kanban-board">
-      <!-- Pizarra 1 "ToDo" -->
       <section class="kanban-column" id="column-todo">
         <div class="column-header">
           <h2>Por Hacer</h2>
           <span class="column-badge" id="badge-todo">0</span>
         </div>
-        <!-- Contenedor donde SortableJS actuará y meterá las tarjetas -->
         <div class="task-list" id="list-todo"></div>
       </section>
 
-      <!-- Pizarra 2 "Doing" -->
       <section class="kanban-column" id="column-doing">
         <div class="column-header">
           <h2>En Proceso</h2>
@@ -89,7 +94,6 @@
         <div class="task-list" id="list-doing"></div>
       </section>
 
-      <!-- Pizarra 3 "Done" -->
       <section class="kanban-column" id="column-done">
         <div class="column-header">
           <h2>Finalizado</h2>
@@ -99,18 +103,13 @@
       </section>
     </main>
 
-    <!-- Las ventanas modales flotantes -->
     <div class="modal-overlay" id="modal-add-task">
       <div class="modal-box">
-        <!-- Encabezado del cuadro -->
         <div class="modal-header">
           <h2>Crear Nueva Tarea</h2>
           <button id="btn-close-add-modal" class="btn-close">&times;</button>
         </div>
-
-        <!-- Formulario nativo -->
         <form id="form-add-task">
-          <!-- Campo: Título -->
           <div class="form-group">
             <label for="input-title">Título de la tarea</label>
             <input
@@ -121,8 +120,6 @@
               maxlength="50"
             />
           </div>
-
-          <!-- Campo: Descripción -->
           <div class="form-group">
             <label for="input-desc">Descripción detallada</label>
             <textarea
@@ -132,8 +129,6 @@
               required
             ></textarea>
           </div>
-
-          <!-- Campo: Selector de Prioridad -->
           <div class="form-group">
             <label>Nivel de Prioridad</label>
             <div class="priority-selector">
@@ -148,30 +143,107 @@
               </label>
             </div>
           </div>
-
-          <!-- Campo: Fecha Límite -->
           <div class="form-group">
             <label for="input-date">Fecha Límite</label>
             <input type="date" id="input-date" required />
           </div>
-
-          <!-- Botones de Acción inferiores -->
           <div class="form-actions">
             <button type="button" id="btn-cancel-add" class="btn-secondary">
               Cancelar
             </button>
-            <button type="submit" class="btn-submit">+ Crear Tareas</button>
+            <button type="submit" class="btn-submit">+ Crear Tarea</button>
           </div>
         </form>
       </div>
     </div>
-    <!-- 1. La librería externa SortableJS -->
-    <script src="js/sortable.js"></script>
 
-    <!-- 2. Tu archivo principal de cargar datos -->
+    <div class="modal-overlay" id="modal-edit-task">
+      <div class="modal-box">
+        <div class="modal-header">
+          <h2>Detalle de la Tarea</h2>
+          <button id="btn-close-edit-modal" class="btn-close">&times;</button>
+        </div>
+        <form id="form-edit-task">
+          <input type="hidden" id="edit-task-id" />
+          <div class="form-group">
+            <label for="edit-title">Título</label>
+            <input type="text" id="edit-title" required maxlength="50" />
+          </div>
+          <div class="form-group">
+            <label for="edit-desc">Descripción</label>
+            <textarea id="edit-desc" rows="3" required></textarea>
+          </div>
+          <div class="form-group">
+            <label>Prioridad</label>
+            <div class="priority-selector">
+              <label class="priority-radio baja">
+                <input type="radio" name="edit-priority" value="Baja" /> Baja
+              </label>
+              <label class="priority-radio media">
+                <input type="radio" name="edit-priority" value="Media" /> Media
+              </label>
+              <label class="priority-radio alta">
+                <input type="radio" name="edit-priority" value="Alta" /> Alta
+              </label>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="edit-date">Fecha Límite</label>
+            <input type="date" id="edit-date" required />
+          </div>
+          <div class="form-group">
+            <label for="edit-status">Estado de la Tarea</label>
+            <select
+              id="edit-status"
+              style="
+                padding: 10px 12px;
+                border: 1px solid #e2e8f0;
+                border-radius: 8px;
+                font-size: 14px;
+                color: var(--text-main);
+                outline: none;
+                width: 100%;
+                background-color: white;
+              "
+            >
+              <option value="todo">○ Por Hacer</option>
+              <option value="doing">◐ En Proceso</option>
+              <option value="done">● Finalizado</option>
+            </select>
+          </div>
+          <div class="comments-section">
+            <label>Comentarios del equipo</label>
+            <div class="comments-log" id="comments-log"></div>
+            <div class="add-comment-group">
+              <input
+                type="text"
+                id="input-new-comment"
+                placeholder="Escribe un comentario..."
+              />
+              <button type="button" id="btn-add-comment" class="btn-primary">
+                Enviar
+              </button>
+            </div>
+          </div>
+          <div class="form-actions">
+            <button type="button" id="btn-delete-task" class="btn-danger">
+              🗑 Eliminar Tarea
+            </button>
+            <div class="actions-right">
+              <button type="button" id="btn-cancel-edit" class="btn-secondary">
+                Cancelar
+              </button>
+              <button type="submit" class="btn-submit">
+                💾︎ Guardar Cambios
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <script src="js/Sortable.js"></script>
     <script src="js/main.js"></script>
-
-    <!-- 3. ¡NUEVO! Tu archivo exclusivo de movimiento -->
     <script src="js/drag-drop.js"></script>
   </body>
 </html>

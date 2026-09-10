@@ -1,7 +1,9 @@
 const opcionesSortable = {
-  group: "kanban-shared", // Links the 3 columns together
+  group: "kanban-shared",
   animation: 200,
   ghostClass: "sortable-ghost",
+  filter: ".btn-ver-detalle",
+  preventOnFilter: false,
 
   onEnd: async function (evento) {
     const tarjetaElemento = evento.item;
