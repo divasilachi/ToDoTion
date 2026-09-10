@@ -1,39 +1,29 @@
-/* ==========================================================================
-   1. VARIABLES DE COLOR Y FUENTES (Tu Paleta de Stitch oficial)
-   ========================================================================== */
 :root {
-  /* Colores Principales (Primary & Secondary) */
-  --primary-emerald: #18b37f; /* Verde brillante para el botón añadir */
-  --secondary-forest: #3f4b3b; /* Verde oscuro para acentos y títulos */
+  --primary-emerald: #18b37f;
+  --secondary-forest: #3f4b3b;
 
-  /* Colores Neutros (Fondos y Contenedores) */
-  --neutral-bg: #dcdcdc; /* Gris ultra claro para el fondo de la pantalla */
-  --neutral-column: #a4b4c4; /* Gris suave para el fondo de las 3 columnas */
-  --neutral-card: #ffffff; /* Blanco puro para las tarjetas de tareas */
+  --neutral-bg: #e9e9e9;
+  --neutral-column: #c7c7c7;
+  --neutral-card: #ffffff;
 
-  /* Colores de Texto */
-  --text-main: #1e293b; /* Gris muy oscuro para máxima legibilidad */
-  --text-muted: #64748b; /* Gris medio para descripciones y fechas */
+  --text-main: #1e293b;
+  --text-muted: #575757;
 
-  /* Semáforo de Prioridades */
-  --priority-high: #723a3a; /* Rojo para prioridad Alta */
-  --priority-medium: #b58739; /* Naranja para prioridad Media */
-  --priority-low: #67ae95; /* Verde para prioridad Baja */
+  /* Priority indicators */
+  --priority-high: #723a3a;
+  --priority-medium: #b58739;
+  --priority-low: #67ae95;
 }
 
-/* ==========================================================================
-   2. RESETEO BÁSICO DEL NAVEGADOR
-   ========================================================================== */
 * {
   margin: 0;
   padding: 0;
-  box-sizing: border-box; /* Evita que los paddings rompan el tamaño de las cajas */
+  box-sizing: border-box;
 }
 
 body {
-  background-color: var(--neutral-bg);
+  background-color: #ededed;
   color: var(--text-main);
-  /* Aplicamos las tipografías oficiales de tu diseño de Stitch */
   font-family:
     "Inter",
     "Plus Jakarta Sans",
@@ -42,5 +32,5 @@ body {
     sans-serif;
   min-height: 100vh;
   padding: 24px;
-  overflow-x: hidden; /* Evita scrolls horizontales raros en la pantalla principal */
+  overflow-x: hidden;
 }

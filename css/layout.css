@@ -1,41 +1,86 @@
-/* ==========================================================================
-   1. DISEÑO DE LA CABECERA (Header)
-   ========================================================================== */
 .main-header {
   display: flex;
-  justify-content: space-between; /* Empuja el logo a la izq. y las acciones a la der. */
-  align-items: center; /* Centra verticalmente todos los elementos */
+  justify-content: space-between;
+  align-items: center;
   background-color: var(--neutral-card);
   padding: 16px 24px;
   border-radius: 12px;
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05); /* Sombra suave de Stitch */
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
   margin-bottom: 24px;
   gap: 20px;
 }
 
-/* Ajuste del tamaño de tu logo oficial */
 .app-logo {
   height: 40px;
   width: auto;
   display: block;
 }
 
-/* Contenedor que agrupa buscador, estadísticas y botón a la derecha */
 .header-actions {
   display: flex;
   align-items: center;
-  gap: 20px; /* Separa los elementos entre sí */
+  gap: 20px;
 }
 
-/* ==========================================================================
-   2. ESTADÍSTICAS Y ELEMENTOS INDIVIDUALES DEL HEADER
-   ========================================================================== */
 .dashboard-stats-wrapper {
   background-color: var(--neutral-card);
   padding: 16px 24px;
   border-radius: 12px;
   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
-  margin-bottom: 24px; /* Separa las estadísticas de las columnas de abajo */
+  margin-bottom: 24px;
+}
+
+.progress-dashboard {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 40px;
+  width: 100%;
+}
+
+.progress-legend {
+  display: flex;
+  gap: 20px;
+  white-space: nowrap;
+}
+
+.legend-item {
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.legend-item.todo {
+  color: var(--text-muted);
+}
+.legend-item.doing {
+  color: var(--priority-medium);
+}
+.legend-item.done {
+  color: var(--primary-emerald);
+}
+
+.progress-bar-container {
+  flex: 1;
+  height: 12px;
+  background-color: #e2e8f0;
+  border-radius: 20px;
+  display: flex;
+  overflow: hidden;
+}
+
+.progress-segment {
+  height: 100%;
+  transition: width 0.4s ease;
+}
+
+.segment-todo {
+  background-color: #cbd5e1;
+}
+.segment-doing {
+  background-color: #f59e0b;
+}
+.segment-done {
+  background-color: #10b981;
 }
 
 #search-bar {
@@ -49,25 +94,7 @@
 }
 
 #search-bar:focus {
-  border-color: var(
-    --primary-emerald
-  ); /* Se ilumina con tu verde al hacer clic */
-}
-
-.stats-panel {
-  display: flex;
-  gap: 20px;
-  justify-content: flex-start; /* Alinea las cajitas al principio del recuadro */
-}
-
-.stat-box {
-  background-color: var(--neutral-bg);
-  padding: 10px 18px;
-  border-radius: 8px;
-  font-size: 14px;
-  font-weight: 600;
-  color: var(--text-muted);
-  border: 1px solid #e2e8f0; /* Un borde sutil para darles entidad */
+  border-color: var(--primary-emerald);
 }
 
 .stat-box span {
@@ -77,7 +104,6 @@
   font-size: 15px;
 }
 
-/* Tu botón estrella unificado */
 .btn-primary {
   background-color: var(--primary-emerald);
   color: #ffffff;
@@ -90,31 +116,26 @@
 }
 
 .btn-primary:hover {
-  background-color: #059669; /* Se oscurece un pelín al pasar el ratón */
+  background-color: #059669;
 }
 
-/* ==========================================================================
-   3. ESTRUCTURA DEL TABLERO KANBAN (Las 3 Columnas)
-   ========================================================================== */
 .kanban-board {
   display: flex;
   gap: 20px;
   align-items: flex-start;
-  /* Ajustamos el cálculo restando el espacio que ocupa el nuevo panel */
   height: calc(100vh - 220px);
 }
 
 .kanban-column {
-  flex: 1; /* ¡Clave! Hace que las 3 columnas midan exactamente lo mismo */
+  flex: 1;
   background-color: var(--neutral-column);
   padding: 20px;
   border-radius: 12px;
-  max-height: 100%; /* No se estira infinitamente hacia abajo */
+  max-height: 100%;
   display: flex;
-  flex-direction: column; /* Los elementos de la columna van en vertical */
+  flex-direction: column;
 }
 
-/* Cabecera interna de cada columna (Título + Número) */
 .column-header {
   display: flex;
   justify-content: space-between;
@@ -128,7 +149,6 @@
   color: var(--text-main);
 }
 
-/* El circulito con el número de tareas de la columna */
 .column-badge {
   background-color: #e2e8f0;
   color: var(--text-muted);
@@ -138,12 +158,12 @@
   border-radius: 20px;
 }
 
-/* El contenedor donde caerán las tarjetas del JSON */
 .task-list {
   flex: 1;
-  overflow-y: auto; /* Si hay muchas tareas, la columna tendrá su propio scroll */
+  overflow-y: auto;
   display: flex;
   flex-direction: column;
   gap: 12px;
-  min-height: 100px; /* Espacio mínimo para que SortableJS pueda soltar tarjetas */
+  min-height: 100px;
+  padding-right: 8px;
 }

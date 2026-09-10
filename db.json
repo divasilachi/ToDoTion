@@ -6,7 +6,7 @@
       "description": "Integrar la librería SortableJS en Vanilla JavaScript para permitir arrastrar y soltar las tarjetas entre columnas persistiendo el estado automáticamente con fetch a la API mock json-server.",
       "priority": "Alta",
       "limitDate": "2024-10-26",
-      "status": "doing",
+      "status": "done",
       "comments": [
         "Probé la librería en local con SortableJS y responde muy rápido. Solo falta sincronizar el evento onEnd con el PATCH.",
         "Genial, ya dejé listo el endpoint en el json-server para recibir el status modificado. Cualquier duda con el payload de {\"columnId\": \"in_progress\"} me avisas por Slack.",
@@ -21,6 +21,34 @@
       "limitDate": "2024-10-28",
       "status": "todo",
       "comments": []
+    },
+    {
+      "title": "12344",
+      "description": "Prueba",
+      "priority": "Media",
+      "limitDate": "2004-05-04",
+      "status": "done",
+      "comments": [],
+      "id": "ZFyrkmPpdLw"
+    },
+    {
+      "title": "2234",
+      "description": "Otra prueba mas",
+      "priority": "Baja",
+      "limitDate": "2002-01-01",
+      "status": "doing",
+      "comments": [],
+      "id": "tV6DjWuPvnU"
+    },
+    {
+      "title": "333",
+      "description": "333",
+      "priority": "Baja",
+      "limitDate": "3333-03-31",
+      "status": "done",
+      "comments": [],
+      "id": "KCOKZ3f1s7k"
     }
-  ]
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
 }

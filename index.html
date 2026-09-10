@@ -33,15 +33,37 @@
 
     <!-- ¡NUEVO BLOQUE DE ESTADÍSTICAS! Situado por encima de las pizarras -->
     <section class="dashboard-stats-wrapper">
-      <div class="stats-panel">
-        <div class="stat-box status-todo">
-          Por Hacer <span id="count-todo">0</span>
+      <div class="progress-dashboard">
+        <!-- PARTE IZQUIERDA: Las leyendas con sus colores -->
+        <div class="progress-legend">
+          <span class="legend-item todo"
+            >● Por Hacer (<span id="count-todo">0</span>)</span
+          >
+          <span class="legend-item doing"
+            >● En Proceso (<span id="count-doing">0</span>)</span
+          >
+          <span class="legend-item done"
+            >● Finalizado (<span id="count-done">0</span>)</span
+          >
         </div>
-        <div class="stat-box status-doing">
-          En Proceso <span id="count-doing">0</span>
-        </div>
-        <div class="stat-box status-done">
-          Finalizado <span id="count-done">0</span>
+
+        <!-- PARTE DERECHA: La barra segmentada proporcional -->
+        <div class="progress-bar-container">
+          <div
+            class="progress-segment segment-todo"
+            id="bar-todo"
+            style="width: 33.3%"
+          ></div>
+          <div
+            class="progress-segment segment-doing"
+            id="bar-doing"
+            style="width: 33.3%"
+          ></div>
+          <div
+            class="progress-segment segment-done"
+            id="bar-done"
+            style="width: 33.3%"
+          ></div>
         </div>
       </div>
     </section>
@@ -77,9 +99,79 @@
       </section>
     </main>
 
-    <!-- NOTA: Las ventanas modales flotantes las dejaremos preparadas más adelante -->
+    <!-- Las ventanas modales flotantes -->
+    <div class="modal-overlay" id="modal-add-task">
+      <div class="modal-box">
+        <!-- Encabezado del cuadro -->
+        <div class="modal-header">
+          <h2>Crear Nueva Tarea</h2>
+          <button id="btn-close-add-modal" class="btn-close">&times;</button>
+        </div>
 
-    <!-- Enlace al JS principal -->
+        <!-- Formulario nativo -->
+        <form id="form-add-task">
+          <!-- Campo: Título -->
+          <div class="form-group">
+            <label for="input-title">Título de la tarea</label>
+            <input
+              type="text"
+              id="input-title"
+              placeholder="Ej. Comprar el pan..."
+              required
+              maxlength="50"
+            />
+          </div>
+
+          <!-- Campo: Descripción -->
+          <div class="form-group">
+            <label for="input-desc">Descripción detallada</label>
+            <textarea
+              id="input-desc"
+              placeholder="Escribe los detalles aquí..."
+              rows="4"
+              required
+            ></textarea>
+          </div>
+
+          <!-- Campo: Selector de Prioridad -->
+          <div class="form-group">
+            <label>Nivel de Prioridad</label>
+            <div class="priority-selector">
+              <label class="priority-radio baja">
+                <input type="radio" name="priority" value="Baja" checked /> Baja
+              </label>
+              <label class="priority-radio media">
+                <input type="radio" name="priority" value="Media" /> Media
+              </label>
+              <label class="priority-radio alta">
+                <input type="radio" name="priority" value="Alta" /> Alta
+              </label>
+            </div>
+          </div>
+
+          <!-- Campo: Fecha Límite -->
+          <div class="form-group">
+            <label for="input-date">Fecha Límite</label>
+            <input type="date" id="input-date" required />
+          </div>
+
+          <!-- Botones de Acción inferiores -->
+          <div class="form-actions">
+            <button type="button" id="btn-cancel-add" class="btn-secondary">
+              Cancelar
+            </button>
+            <button type="submit" class="btn-submit">+ Crear Tareas</button>
+          </div>
+        </form>
+      </div>
+    </div>
+    <!-- 1. La librería externa SortableJS -->
+    <script src="js/sortable.js"></script>
+
+    <!-- 2. Tu archivo principal de cargar datos -->
     <script src="js/main.js"></script>
+
+    <!-- 3. ¡NUEVO! Tu archivo exclusivo de movimiento -->
+    <script src="js/drag-drop.js"></script>
   </body>
 </html>
