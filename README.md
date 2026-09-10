@@ -32,28 +32,6 @@ El desarrollo se ha realizado utilizando **JavaScript Vanilla (puro)** y aplican
 
 ---
 
-## 🚀 Instalación y Despliegue en Local
-
-Para evaluar la persistencia de datos relacional y las operaciones CRUD de la aplicación, es necesario levantar el entorno local siguiendo estos pasos:
-
-### 1. Clonar el repositorio
-```bash
-git clone https://github.com
-cd TU_REPOSITORIO
-```
-
-### 2. Iniciar el Servidor de Datos (`json-server`)
-Abre tu terminal secundaria (CMD de Windows o similar) en la raíz del proyecto y ejecuta el siguiente comando para levantar la API REST en el puerto 3000:
-```bash
-npx json-server --watch db.json --port 3000
-```
-*Asegúrate de comprobar que los recursos de `/tasks` y `/comments` están latiendo correctamente.*
-
-### 3. Lanzar la Interfaz de Usuario
-Ejecuta la extensión **Live Server** de Visual Studio Code sobre tu archivo `index.html` para desplegar el cliente en tu navegador (puerto `5500`). ¡El proyecto estará listo para funcionar!
-
----
-
 ## 🧰 Tecnologías Utilizadas
 
 - **HTML5** Semántico
