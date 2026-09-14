@@ -4,3 +4,5 @@ Thumbs.db
 .vscode/
 
 .live-server*
+
+node_modules/

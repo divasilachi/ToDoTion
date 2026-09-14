@@ -1,68 +1,3 @@
-/* ==========================================================================
-   1. MAQUETACIÓN GLOBAL Y NAVEGACIÓN SUPERIOR (ORDENADOR)
-   ========================================================================== */
-.main-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background-color: var(--neutral-card);
-  padding: 16px 24px;
-  border-radius: 12px;
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
-  margin-bottom: 24px;
-  gap: 20px;
-}
-
-.app-logo {
-  height: 40px;
-  width: auto;
-  display: block;
-}
-
-.header-actions {
-  display: flex;
-  align-items: center;
-  gap: 20px;
-}
-
-.nav-menu-responsive {
-  display: flex;
-  align-items: center;
-  gap: 20px;
-}
-
-#search-bar {
-  padding: 10px 16px;
-  border: 1px solid #e2e8f0;
-  border-radius: 8px;
-  width: 240px;
-  font-size: 14px;
-  outline: none;
-  transition: border-color 0.2s ease;
-}
-
-#search-bar:focus {
-  border-color: var(--primary-emerald);
-}
-
-.btn-primary {
-  background-color: var(--primary-emerald);
-  color: #ffffff;
-  border: none;
-  padding: 10px 18px;
-  border-radius: 8px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: background-color 0.2s ease;
-}
-
-.btn-primary:hover {
-  background-color: #059669;
-}
-
-/* ==========================================================================
-   2. CUADRO DE ESTADÍSTICAS Y BARRA DE PROGRESO (ORDENADOR)
-   ========================================================================== */
 .dashboard-stats-wrapper {
   background-color: var(--neutral-card);
   padding: 16px 24px;
@@ -91,13 +26,11 @@
 }
 
 .legend-item.todo {
-  color: var(--text-muted);
+  color: #6b98d0;
 }
-
 .legend-item.doing {
   color: var(--priority-medium);
 }
-
 .legend-item.done {
   color: var(--primary-emerald);
 }
@@ -117,20 +50,15 @@
 }
 
 .segment-todo {
-  background-color: #cbd5e1;
+  background-color: #a0c6f5;
 }
-
 .segment-doing {
   background-color: #f59e0b;
 }
-
 .segment-done {
   background-color: #10b981;
 }
 
-/* ==========================================================================
-   3. DISPOSICIÓN DEL TABLERO KANBAN (ORDENADOR)
-   ========================================================================== */
 .kanban-board {
   display: flex;
   gap: 20px;
@@ -162,8 +90,8 @@
 }
 
 .column-badge {
-  background-color: #e2e8f0;
-  color: var(--text-muted);
+  background-color: #ffffff;
+  color: #000000;
   font-size: 12px;
   font-weight: 700;
   padding: 2px 8px;
@@ -180,9 +108,6 @@
   padding-right: 8px;
 }
 
-/* ==========================================================================
-   4. ESTILOS DE COMPORTAMIENTO RESPONSIVE (MÓVIL)
-   ========================================================================== */
 .btn-hamburger,
 .mobile-board-selector {
   display: none;
@@ -216,7 +141,6 @@
   .nav-menu-responsive.active {
     display: flex;
   }
-
   #search-bar {
     width: 100%;
   }
@@ -263,24 +187,16 @@
   .kanban-column.active-mobile-view {
     display: flex;
   }
-
   .progress-dashboard {
-    display: flex;
     flex-direction: column !important;
     align-items: stretch !important;
     gap: 12px;
-    width: 100%;
   }
-
   .progress-bar-container {
     display: flex !important;
     width: 100% !important;
     height: 12px !important;
-    background-color: #e2e8f0;
-    border-radius: 20px;
-    overflow: hidden;
   }
-
   .progress-segment {
     height: 12px !important;
   }

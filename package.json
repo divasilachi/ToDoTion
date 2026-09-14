@@ -1,0 +1,24 @@
+{
+  "name": "todotion",
+  "version": "1.0.0",
+  "description": "**ToDoTion** es un tablero Kanban interactivo, minimalista y elegante diseñado para optimizar la gestión de proyectos y la organización de tareas en entornos ágiles. La aplicación se comunica de forma asíncrona con una API simulada local para ofrecer una experiencia fluida de usuario (SPA) y persistencia completa de datos.",
+  "main": "index.js",
+  "scripts": {
+    "start": "json-server --watch db.json"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/divasilachi/ToDoTion.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/divasilachi/ToDoTion/issues"
+  },
+  "homepage": "https://github.com/divasilachi/ToDoTion#readme",
+  "dependencies": {
+    "json-server": "^1.0.0-beta.15"
+  }
+}

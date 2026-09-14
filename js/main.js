@@ -1,25 +1,9 @@
-const API_URL = "http://localhost:3000/tasks";
-
-const modalAddTask = document.getElementById("modal-add-task");
-const formAddTask = document.getElementById("form-add-task");
-const modalEditTask = document.getElementById("modal-edit-task");
-const formEditTask = document.getElementById("form-edit-task");
-const commentsLog = document.getElementById("comments-log");
-
-const btnOpenAddModal = document.getElementById("btn-open-add-modal");
-const btnCloseAddModal = document.getElementById("btn-close-add-modal");
-const btnCancelAdd = document.getElementById("btn-cancel-add");
-const btnCloseEditModal = document.getElementById("btn-close-edit-modal");
-const btnCancelEdit = document.getElementById("btn-cancel-edit");
-const searchBar = document.getElementById("search-bar");
-
 /* ==========================================================================
    1. RENDERIZADO DEL TABLERO KANBAN
    ========================================================================== */
 async function obtenerYMostrarTareas() {
   try {
-    const respuesta = await fetch(API_URL);
-    const tareas = await respuesta.json();
+    const tareas = await fetchTareas(); // Viene de api.js
 
     document.getElementById("list-todo").innerHTML = "";
     document.getElementById("list-doing").innerHTML = "";
@@ -54,230 +38,115 @@ async function obtenerYMostrarTareas() {
       }
     });
 
-    document.getElementById("count-todo").textContent = contadorTodo;
-    document.getElementById("count-doing").textContent = contadorDoing;
-    document.getElementById("count-done").textContent = contadorDone;
-
-    document.getElementById("badge-todo").textContent = contadorTodo;
-    document.getElementById("badge-doing").textContent = contadorDoing;
-    document.getElementById("badge-done").textContent = contadorDone;
-
-    const totalTareas = contadorTodo + contadorDoing + contadorDone;
-
-    if (totalTareas > 0) {
-      const pctTodo = (contadorTodo / totalTareas) * 100;
-      const pctDoing = (contadorDoing / totalTareas) * 100;
-      const pctDone = (contadorDone / totalTareas) * 100;
-
-      document.getElementById("bar-todo").style.width = `${pctTodo}%`;
-      document.getElementById("bar-doing").style.width = `${pctDoing}%`;
-      document.getElementById("bar-done").style.width = `${pctDone}%`;
-    } else {
-      document.getElementById("bar-todo").style.width = "0%";
-      document.getElementById("bar-doing").style.width = "0%";
-      document.getElementById("bar-done").style.width = "0%";
-    }
-
-    activarDragAndDrop();
+    actualizarContadoresYBarras(contadorTodo, contadorDoing, contadorDone);
+    activarDragAndDrop(); // Viene de drag-drop.js
   } catch (error) {
     console.error("Error al conectar con la base de datos:", error);
   }
 }
 
-/* ==========================================================================
-   2. CONTROLADORES EN VIVO DE ESTADÍSTICAS
-   ========================================================================== */
+function actualizarContadoresYBarras(todo, doing, done) {
+  document.getElementById("count-todo").textContent = todo;
+  document.getElementById("count-doing").textContent = doing;
+  document.getElementById("count-done").textContent = done;
+
+  document.getElementById("badge-todo").textContent = todo;
+  document.getElementById("badge-doing").textContent = doing;
+  document.getElementById("badge-done").textContent = done;
+
+  const totalTareas = todo + doing + done;
+
+  if (totalTareas > 0) {
+    document.getElementById("bar-todo").style.width =
+      `${(todo / totalTareas) * 100}%`;
+    document.getElementById("bar-doing").style.width =
+      `${(doing / totalTareas) * 100}%`;
+    document.getElementById("bar-done").style.width =
+      `${(done / totalTareas) * 100}%`;
+  } else {
+    document.getElementById("bar-todo").style.width = "0%";
+    document.getElementById("bar-doing").style.width = "0%";
+    document.getElementById("bar-done").style.width = "0%";
+  }
+}
+
 function actualizarContadoresEnVivo() {
   let contadorTodo = document.getElementById("list-todo").children.length;
   let contadorDoing = document.getElementById("list-doing").children.length;
   let contadorDone = document.getElementById("list-done").children.length;
-
-  document.getElementById("count-todo").textContent = contadorTodo;
-  document.getElementById("count-doing").textContent = contadorDoing;
-  document.getElementById("count-done").textContent = contadorDone;
-
-  document.getElementById("badge-todo").textContent = contadorTodo;
-  document.getElementById("badge-doing").textContent = contadorDoing;
-  document.getElementById("badge-done").textContent = contadorDone;
-
-  const total = contadorTodo + contadorDoing + contadorDone;
-  if (total > 0) {
-    document.getElementById("bar-todo").style.width =
-      `${(contadorTodo / total) * 100}%`;
-    document.getElementById("bar-doing").style.width =
-      `${(contadorDoing / total) * 100}%`;
-    document.getElementById("bar-done").style.width =
-      `${(contadorDone / total) * 100}%`;
-  }
+  actualizarContadoresYBarras(contadorTodo, contadorDoing, contadorDone);
 }
 
 /* ==========================================================================
-   3. MODAL DE CREACIÓN DE TAREAS (POST)
+   2. OPERACIONES CRUD: CREAR, EDITAR, COMENTAR Y ELIMINAR
    ========================================================================== */
-function abrirModal() {
-  modalAddTask.style.display = "flex";
-}
+// Formulario de Crear
+document
+  .getElementById("form-add-task")
+  .addEventListener("submit", async (evento) => {
+    evento.preventDefault();
+    const nuevaTarea = {
+      title: document.getElementById("input-title").value,
+      description: document.getElementById("input-desc").value,
+      priority: document.querySelector('input[name="priority"]:checked').value,
+      dueDate: document.getElementById("input-date").value,
+      status: "todo",
+    };
 
-function cerrarModal() {
-  modalAddTask.style.display = "none";
-  formAddTask.reset();
-}
-
-btnOpenAddModal.addEventListener("click", abrirModal);
-btnCloseAddModal.addEventListener("click", cerrarModal);
-btnCancelAdd.addEventListener("click", cerrarModal);
-
-formAddTask.addEventListener("submit", async (evento) => {
-  evento.preventDefault();
-
-  const titulo = document.getElementById("input-title").value;
-  const descripcion = document.getElementById("input-desc").value;
-  const prioridad = document.querySelector(
-    'input[name="priority"]:checked',
-  ).value;
-  const fechaLimite = document.getElementById("input-date").value;
-
-  const nuevaTarea = {
-    title: titulo,
-    description: descripcion,
-    priority: prioridad,
-    dueDate: fechaLimite,
-    status: "todo",
-  };
-
-  try {
-    const respuesta = await fetch(API_URL, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(nuevaTarea),
-    });
-
-    if (respuesta.ok) {
-      cerrarModal();
-      await obtenerYMostrarTareas();
-    } else {
-      alert("Hubo un problema al guardar la tarea en el servidor.");
-    }
-  } catch (error) {
-    console.error("Error al enviar la tarea:", error);
-  }
-});
-
-/* ==========================================================================
-   4. FILTRO DE BÚSQUEDA
-   ========================================================================== */
-searchBar.addEventListener("input", (evento) => {
-  const textoBuscado = evento.target.value.toLowerCase();
-  const todasLasTarjetas = document.querySelectorAll(".task-card");
-
-  todasLasTarjetas.forEach((tarjeta) => {
-    const tituloTarjeta = tarjeta
-      .querySelector(".card-title")
-      .textContent.toLowerCase();
-    if (tituloTarjeta.includes(textoBuscado)) {
-      tarjeta.style.display = "flex";
-    } else {
-      tarjeta.style.display = "none";
+    try {
+      const respuesta = await fetchCrearTarea(nuevaTarea);
+      if (respuesta.ok) {
+        cerrarModal();
+        await obtenerYMostrarTareas();
+      }
+    } catch (error) {
+      console.error("Error al enviar la tarea:", error);
     }
   });
-});
 
-/* ==========================================================================
-   5. MODAL DE EDICIÓN Y DETALLE RELACIONAL
-   ========================================================================== */
-async function abrirModalEdicion(id) {
-  try {
-    const respuestaTarea = await fetch(`${API_URL}/${id}`);
-    const tarea = await respuestaTarea.json();
-
-    document.getElementById("edit-task-id").value = tarea.id;
-    document.getElementById("edit-title").value = tarea.title;
-    document.getElementById("edit-desc").value = tarea.description;
-    document.getElementById("edit-date").value = tarea.dueDate;
-    document.getElementById("edit-status").value = tarea.status;
-
-    document.querySelector(
-      `input[name="edit-priority"][value="${tarea.priority}"]`,
-    ).checked = true;
-
-    const respuestaComments = await fetch(
-      `http://localhost:3000/comments?taskId=${String(id)}`,
-    );
-    const listaComentarios = await respuestaComments.json();
-
-    commentsLog.innerHTML = "";
-
-    if (listaComentarios && listaComentarios.length > 0) {
-      listaComentarios.forEach((comentario) => {
-        commentsLog.innerHTML += `
-          <div class="comment-bubble">
-            <strong style="font-size: 11px; color: var(--secondary-forest); display: block; margin-bottom: 2px;">
-              ⚲ ${comentario.author || "Anónimo"}:
-            </strong>
-            <p style="margin: 0; font-size: 13px;">${comentario.text}</p>
-          </div>`;
-      });
-    } else {
-      commentsLog.innerHTML = `<p style="font-size: 12px; color: var(--text-muted); text-align: center; padding: 10px;">No hay comentarios en esta tarea aún.</p>`;
-    }
-
-    modalEditTask.style.display = "flex";
-  } catch (error) {
-    console.error(
-      "Error al obtener el detalle de la tarea y comentarios:",
-      error,
-    );
-  }
-}
-
-function cerrarModalEdicion() {
-  modalEditTask.style.display = "none";
-  formEditTask.reset();
-}
-
-btnCloseEditModal.addEventListener("click", cerrarModalEdicion);
-btnCancelEdit.addEventListener("click", cerrarModalEdicion);
-
-document.addEventListener("click", (evento) => {
+// Detectar clic en el botón de ver detalle de la tarjeta
+document.addEventListener("click", async (evento) => {
   if (evento.target.classList.contains("btn-ver-detalle")) {
     const tarjetaPulsada = evento.target.closest(".task-card");
     const idTarea = tarjetaPulsada.getAttribute("data-id");
-    abrirModalEdicion(idTarea);
-  }
-});
-// --- 6. OPERACIONES CRUD: ACTUALIZAR Y ELIMINAR ---
-formEditTask.addEventListener("submit", async (evento) => {
-  evento.preventDefault();
-  const id = document.getElementById("edit-task-id").value;
-
-  try {
-    const resGet = await fetch(`${API_URL}/${id}`);
-    const tareaActual = await resGet.json();
-
-    const tareaActualizada = {
-      ...tareaActual,
-      title: document.getElementById("edit-title").value,
-      description: document.getElementById("edit-desc").value,
-      priority: document.querySelector('input[name="edit-priority"]:checked')
-        .value,
-      dueDate: document.getElementById("edit-date").value,
-      status: document.getElementById("edit-status").value,
-    };
-
-    const resPut = await fetch(`${API_URL}/${id}`, {
-      method: "PUT",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(tareaActualizada),
-    });
-
-    if (resPut.ok) {
-      cerrarModalEdicion();
-      await obtenerYMostrarTareas();
+    try {
+      const tarea = await fetchTareaPorId(idTarea);
+      const comentarios = await fetchComentariosPorTarea(idTarea);
+      rellenarModalEdicion(tarea, comentarios);
+    } catch (error) {
+      console.error("Error al abrir detalle:", error);
     }
-  } catch (error) {
-    console.error("Error al actualizar la tarea:", error);
   }
 });
+
+// Formulario de Editar
+document
+  .getElementById("form-edit-task")
+  .addEventListener("submit", async (evento) => {
+    evento.preventDefault();
+    const id = document.getElementById("edit-task-id").value;
+
+    try {
+      const tareaActual = await fetchTareaPorId(id);
+      const tareaActualizada = {
+        ...tareaActual,
+        title: document.getElementById("edit-title").value,
+        description: document.getElementById("edit-desc").value,
+        priority: document.querySelector('input[name="edit-priority"]:checked')
+          .value,
+        dueDate: document.getElementById("edit-date").value,
+        status: document.getElementById("edit-status").value,
+      };
+
+      const resPut = await fetchActualizarTarea(id, tareaActualizada);
+      if (resPut.ok) {
+        cerrarModalEdicion();
+        await obtenerYMostrarTareas();
+      }
+    } catch (error) {
+      console.error("Error al actualizar la tarea:", error);
+    }
+  });
 
 // Añadir comentario nuevo
 document
@@ -297,24 +166,19 @@ document
     };
 
     try {
-      const respuesta = await fetch("http://localhost:3000/comments", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(nuevoComentario),
-      });
-
+      const respuesta = await fetchCrearComentario(nuevoComentario);
       if (respuesta.ok) {
         inputComentario.value = "";
-        await abrirModalEdicion(id);
-      } else {
-        alert("Hubo un problema al guardar tu comentario en el servidor.");
+        const tarea = await fetchTareaPorId(id);
+        const comentarios = await fetchComentariosPorTarea(id);
+        rellenarModalEdicion(tarea, comentarios);
       }
     } catch (error) {
-      console.error("Error al añadir el comentario relacional:", error);
+      console.error("Error al añadir el comentario:", error);
     }
   });
 
-// Eliminar tarea (DELETE)
+// Eliminar tarea y comentarios en cascada
 document
   .getElementById("btn-delete-task")
   .addEventListener("click", async () => {
@@ -324,8 +188,14 @@ document
       confirm("¿Estás completamente seguro de que quieres eliminar esta tarea?")
     ) {
       try {
-        const respuesta = await fetch(`${API_URL}/${id}`, { method: "DELETE" });
-        if (respuesta.ok) {
+        const listaComentarios = await fetchComentariosPorTarea(id);
+        if (listaComentarios && listaComentarios.length > 0) {
+          for (const comentario of listaComentarios) {
+            await fetchEliminarComentario(comentario.id);
+          }
+        }
+        const respuestaTarea = await fetchEliminarTarea(id);
+        if (respuestaTarea.ok) {
           cerrarModalEdicion();
           await obtenerYMostrarTareas();
         }
@@ -337,7 +207,9 @@ document
 
 document.addEventListener("DOMContentLoaded", obtenerYMostrarTareas);
 
-// --- 7. LÓGICA DE NAVEGACIÓN RESPONSIVE (MÓVIL) ---
+/* ==========================================================================
+   3. LÓGICA DE NAVEGACIÓN RESPONSIVE (MÓVIL)
+   ========================================================================== */
 const btnHamburger = document.getElementById("btn-hamburger");
 const navMenuResponsive = document.getElementById("nav-menu-responsive");
 

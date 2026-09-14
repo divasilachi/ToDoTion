@@ -1,86 +1,38 @@
 {
   "tasks": [
     {
-      "title": "111",
-      "description": "1111",
-      "priority": "Baja",
-      "dueDate": "1111-11-11",
-      "status": "todo",
-      "id": "o__S4ty8y9E"
-    },
-    {
-      "title": "222",
-      "description": "22222",
-      "priority": "Media",
-      "dueDate": "2222-02-22",
-      "status": "done",
-      "id": "jTKacroM_14"
-    },
-    {
       "title": "333",
-      "description": "333333",
-      "priority": "Alta",
-      "dueDate": "3333-03-31",
+      "description": "hugitu",
+      "priority": "Baja",
+      "dueDate": "0055-05-05",
+      "status": "done",
+      "id": "r630H7aGz_c"
+    },
+    {
+      "title": "22",
+      "description": "222",
+      "priority": "Media",
+      "dueDate": "0002-02-22",
       "status": "doing",
-      "id": "KNo2IMITGiI"
+      "id": "2GmEIDftwwk"
+    },
+    {
+      "title": "sss",
+      "description": "dfsd",
+      "priority": "Alta",
+      "dueDate": "0003-03-31",
+      "status": "todo",
+      "id": "p6eAOZfV6Q0"
     }
   ],
   "comments": [
     {
-      "id": "101",
-      "taskId": null,
-      "author": "Ana Gómez",
-      "text": "Recuerda incluir los estados de hover en los botones del modal.",
-      "createdAt": "2026-09-06T10:30:00Z"
-    },
-    {
-      "taskId": null,
-      "author": "Tú (Desarrollador)",
-      "text": "fgdfg",
-      "createdAt": "2026-09-10T17:56:44.870Z",
-      "id": "voCAhLJxOu0"
-    },
-    {
-      "taskId": null,
-      "author": "Tú (Desarrollador)",
-      "text": "fgdfg",
-      "createdAt": "2026-09-10T17:56:49.447Z",
-      "id": "-BwMOZ3-yBk"
-    },
-    {
-      "taskId": null,
+      "taskId": "r630H7aGz_c",
       "author": "Equipo de desarrollo",
-      "text": "fgdfg",
-      "createdAt": "2026-09-10T18:01:36.217Z",
-      "id": "k8-vFThqSLU"
-    },
-    {
-      "taskId": null,
-      "author": "Equipo de desarrollo",
-      "text": "fgdfg",
-      "createdAt": "2026-09-10T18:04:50.083Z",
-      "id": "5IDXzpM_9do"
-    },
-    {
-      "taskId": null,
-      "author": "Equipo de desarrollo",
-      "text": "fgdfg",
-      "createdAt": "2026-09-10T18:05:15.333Z",
-      "id": "WTxldkqBdy4"
-    },
-    {
-      "taskId": null,
-      "author": "Equipo de desarrollo",
-      "text": "fgdfg",
-      "createdAt": "2026-09-10T18:05:20.436Z",
-      "id": "pSvwkYCz35M"
-    },
-    {
-      "taskId": "KNo2IMITGiI",
-      "author": "Equipo de desarrollo",
-      "text": "ss",
-      "createdAt": "2026-09-10T19:02:07.353Z",
-      "id": "P-7eUn_w0Ok"
+      "text": "3433",
+      "createdAt": "2026-09-14T11:20:30.644Z",
+      "id": "kPnkV5W1_ms"
     }
-  ]
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
 }

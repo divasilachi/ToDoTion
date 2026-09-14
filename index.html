@@ -4,14 +4,23 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>ToDoTion - Productive Workspace</title>
-    <link rel="stylesheet" href="css/base.css" />
-    <link rel="stylesheet" href="css/layout.css" />
-    <link rel="stylesheet" href="css/components.css" />
+    <!-- 1. Estilos Base Globales -->
+    <link rel="stylesheet" href="css/base/base.css" />
+
+    <!-- 2. Maquetación y Esqueleto Visual -->
+    <link rel="stylesheet" href="css/layout/header.css" />
+    <link rel="stylesheet" href="css/layout/board.css" />
+
+    <!-- 3. Componentes Específicos -->
+    <link rel="stylesheet" href="css/components/task-card.css" />
+    <link rel="stylesheet" href="css/components/modals.css" />
+    <link rel="stylesheet" href="css/components/buttons.css" />
+    <link rel="stylesheet" href="css/components/comments.css" />
   </head>
   <body>
     <header class="main-header">
       <div class="header-brand">
-        <img src="assets/logo/logo.png" alt="ToDoTion Logo" class="app-logo" />
+        <img src="logo/logo.png" alt="ToDoTion Logo" class="app-logo" />
       </div>
       <div class="header-actions">
         <!-- Botón de hamburguesa nativo -->
@@ -241,9 +250,15 @@
         </form>
       </div>
     </div>
+    <!-- Gestión de Base de Datos -->
+    <script src="js/api.js"></script>
 
-    <script src="js/Sortable.js"></script>
-    <script src="js/main.js"></script>
+    <!-- Lógica visual y componentes independientes -->
+    <script src="js/modales.js"></script>
+    <script src="js/busqueda.js"></script>
     <script src="js/drag-drop.js"></script>
+
+    <!-- El motor principal que inicia y coordina todo -->
+    <script src="js/main.js"></script>
   </body>
 </html>
