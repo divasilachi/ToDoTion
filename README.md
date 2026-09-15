@@ -39,3 +39,45 @@ El desarrollo se ha realizado utilizando **JavaScript Vanilla (puro)** y aplican
 - **JavaScript ES6+** (Async/Await y Fetch API)
 - **SortableJS v1.15.0** (Integración local)
 - **Node.js & json-server** (Mocking de API REST)
+
+---
+
+## 🚀 Instalación y Ejecución Local
+
+Para poner en marcha este proyecto en tu entorno local, sigue estos pasos:
+
+### Prerrequisitos
+
+Asegúrate de tener instalado [Node.js](https://nodejs.org) en tu equipo.
+
+### 1. Clonar el repositorio
+
+```bash
+git clone https://github.com
+cd TU_REPOSITORIO
+```
+
+### 2. Instalar e iniciar json-server
+
+Este proyecto requiere `json-server` para simular la API REST y gestionar la base de datos `db.json`. Tienes dos opciones para ejecutarlo:
+
+#### Opción A: Ejecución directa con NPX (Recomendada, no requiere instalación global)
+Abre una terminal en la ruta raíz del proyecto y ejecuta:
+```bash
+npx json-server --watch db.json --port 3000
+```
+
+#### Opción B: Instalación global
+Si prefieres tenerlo disponible globalmente en tu sistema, instala el paquete y luego levanta el servidor:
+```bash
+npm install -g json-server
+json-server --watch db.json --port 3000
+```
+
+Una vez ejecutado, la API estará disponible en `http://localhost:3000`. No cierres esta terminal.
+
+### 3. Ejecutar la aplicación frontend
+
+Para evitar problemas de CORS con las peticiones asíncronas de JavaScript, abre el archivo `index.html` utilizando un servidor local. 
+
+- Si usas **VS Code**, se recomienda instalar la extensión **Live Server**, hacer clic derecho sobre `index.html` y seleccionar **Open with Live Server**.
